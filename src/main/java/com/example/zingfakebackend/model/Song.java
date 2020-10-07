@@ -136,4 +136,9 @@ public class Song {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public Song() {
+    }
+
+
 }

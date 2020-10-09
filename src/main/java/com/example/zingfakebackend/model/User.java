@@ -21,10 +21,10 @@ public class User {
     private String name;
 
     @NotNull
-    private String Password;
+    private String password;
 
     @Email
-    private String Email;
+    private String email;
 
     @OneToMany(mappedBy = "user")
     private Set<Song> songs;
@@ -54,18 +54,18 @@ public class User {
     }
 
     public String getPassword() {
-        return Password;
+        return password;
     }
 
     public void setPassword(String password) {
-        Password = password;
+        this.password = password;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
     public void setEmail(String email) {
-        Email = email;
+        this.email = email;
     }
 }

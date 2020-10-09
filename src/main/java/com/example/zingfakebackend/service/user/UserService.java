@@ -1,4 +1,7 @@
 package com.example.zingfakebackend.service.user;
 
-public class UserService {
+import org.springframework.stereotype.Service;
+
+@Service
+public class UserService implements IUserService {
 }

@@ -7,4 +7,5 @@ public interface ISongService {
       Song findById(long id);
       void save(Song song);
       void remove(long id);
+      Iterable<Song> findSongByName(String name);
 }

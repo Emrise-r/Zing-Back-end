@@ -1,9 +1,7 @@
 package com.example.zingfakebackend.model;
 
-import org.springframework.web.multipart.MultipartFile;
-
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 import java.util.Date;
 
 @Entity
@@ -14,18 +12,20 @@ public class Song {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long songId;
 
-    @NotNull
+    @NotEmpty
     private String name;
 
     private String description;
 
-    private String img;
+    private String cover_art_url;
 
-    @Transient
-    private MultipartFile imgFile;
+    private String song_url;
 
-    @Transient
-    private MultipartFile songFile;
+//    @Transient
+//    private MultipartFile imgFile;
+//
+//    @Transient
+//    private MultipartFile songFile;
 
     private String artist;
 
@@ -73,29 +73,29 @@ public class Song {
         this.description = description;
     }
 
-    public String getImg() {
-        return img;
+    public String getCover_art_url() {
+        return cover_art_url;
     }
 
-    public void setImg(String img) {
-        this.img = img;
+    public void setCover_art_url(String cover_art_url) {
+        this.cover_art_url = cover_art_url;
     }
 
-    public MultipartFile getImgFile() {
-        return imgFile;
-    }
-
-    public void setImgFile(MultipartFile imgFile) {
-        this.imgFile = imgFile;
-    }
-
-    public MultipartFile getSongFile() {
-        return songFile;
-    }
-
-    public void setSongFile(MultipartFile songFile) {
-        this.songFile = songFile;
-    }
+//    public MultipartFile getImgFile() {
+//        return imgFile;
+//    }
+//
+//    public void setImgFile(MultipartFile imgFile) {
+//        this.imgFile = imgFile;
+//    }
+//
+//    public MultipartFile getSongFile() {
+//        return songFile;
+//    }
+//
+//    public void setSongFile(MultipartFile songFile) {
+//        this.songFile = songFile;
+//    }
 
     public String getArtist() {
         return artist;

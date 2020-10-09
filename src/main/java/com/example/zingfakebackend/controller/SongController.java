@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin("*")
+@RequestMapping("/song")
 public class SongController {
       @Autowired
       ISongService songService;
@@ -17,7 +18,7 @@ public class SongController {
       @Autowired
       ISongRepository songRepository;
 
-      @GetMapping("/allSongs")
+      @GetMapping
       public ResponseEntity<Iterable<Song>> listSongs() {
             Iterable<Song> songs = songService.findAll();
             if (songs == null) {
@@ -26,18 +27,18 @@ public class SongController {
             return new ResponseEntity<>(songs, HttpStatus.OK);
       }
 
-      @GetMapping("/songs/{id}")
+      @GetMapping("/{id}")
       public ResponseEntity<Song> getSongById(@PathVariable long id) {
             return new ResponseEntity<>(songService.findById(id), HttpStatus.OK);
       }
 
-      @PostMapping("/songs")
+      @PostMapping("/create")
       public ResponseEntity<Song> createSong(@RequestBody Song song) {
             songService.save(song);
             return new ResponseEntity<>(song, HttpStatus.CREATED);
       }
 
-      @PutMapping("/song/{id}")
+      @PutMapping("/update/{id}")
       public ResponseEntity<Song> updateSongInfo(@PathVariable long id, @RequestBody Song song) {
             Song currentSong = songService.findById(id);
             if (currentSong == null) {
@@ -45,7 +46,8 @@ public class SongController {
             }
             currentSong.setName(song.getName());
             currentSong.setDescription(song.getDescription());
-            currentSong.setImg(song.getImg());
+//            currentSong.setImg(song.getImg());
+            currentSong.setCover_art_url(song.getCover_art_url());
             currentSong.setArtist(song.getArtist());
             currentSong.setDate(song.getDate());
             currentSong.setGenre(song.getGenre());
@@ -56,7 +58,7 @@ public class SongController {
             return new ResponseEntity<>(currentSong, HttpStatus.OK);
       }
 
-      @DeleteMapping("/song/{id}")
+      @DeleteMapping("/delete/{id}")
       public ResponseEntity<Song> deleteSong(@PathVariable("id") long id) {
             Song song = songService.findById(id);
             if (song == null) {
@@ -66,25 +68,25 @@ public class SongController {
             return new ResponseEntity<>(HttpStatus.OK);
       }
 
-      @GetMapping("/songs/plays/desc")
+      @GetMapping("/plays/desc")
       public ResponseEntity<Iterable<Song>> songOrderByPlaysDesc() {
             Iterable<Song> songPlays = songRepository.findByOrderByPlaysDesc();
             return new ResponseEntity<>(songPlays, HttpStatus.OK);
       }
 
-      @GetMapping("/songs/likes/desc")
+      @GetMapping("/likes/desc")
       public ResponseEntity<Iterable<Song>> songOrderByLikesDesc() {
             Iterable<Song> songLikes = songRepository.findByOrderByLikesDesc();
             return new ResponseEntity<>(songLikes, HttpStatus.OK);
       }
 
-      @GetMapping("/songs/date/desc")
+      @GetMapping("/date/desc")
       public ResponseEntity<Iterable<Song>> songOrderByDateDesc() {
             Iterable<Song> songDate = songRepository.findByOrderByDateDesc();
             return new ResponseEntity<>(songDate, HttpStatus.OK);
       }
 
-      @GetMapping("/songs/{name}")
+      @GetMapping("/search/{name}")
       public ResponseEntity<Iterable<Song>> findSongByNameContaining(@PathVariable String name) {
             return new ResponseEntity<>(songService.findSongByName(name), HttpStatus.OK);
       }

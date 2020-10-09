@@ -1,11 +1,7 @@
 package com.example.zingfakebackend.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import java.util.Set;
+import javax.validation.constraints.*;
 
 @Entity
 @Table
@@ -15,27 +11,37 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
 
-    @NotNull
+    @NotEmpty
     @Min(3)
     @Max(15)
     private String name;
 
-    @NotNull
-    private String Password;
+    @NotEmpty
+    private String password;
 
     @Email
-    private String Email;
+    private String email;
 
-    @OneToMany(mappedBy = "user")
-    private Set<Song> songs;
+    private String account_url;
 
-    public Set<Song> getSongs() {
-        return songs;
+    public String getAccount_url() {
+        return account_url;
     }
 
-    public void setSongs(Set<Song> songs) {
-        this.songs = songs;
+    public void setAccount_url(String account_url) {
+        this.account_url = account_url;
     }
+
+//    @OneToMany(mappedBy = "user")
+//    private Set<Song> songs;
+//
+//    public Set<Song> getSongs() {
+//        return songs;
+//    }
+//
+//    public void setSongs(Set<Song> songs) {
+//        this.songs = songs;
+//    }
 
     public Long getUserId() {
         return userId;
@@ -54,18 +60,18 @@ public class User {
     }
 
     public String getPassword() {
-        return Password;
+        return password;
     }
 
     public void setPassword(String password) {
-        Password = password;
+        this.password = password;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
     public void setEmail(String email) {
-        Email = email;
+        this.email = email;
     }
 }

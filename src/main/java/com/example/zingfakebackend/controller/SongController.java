@@ -45,7 +45,8 @@ public class SongController {
             }
             currentSong.setName(song.getName());
             currentSong.setDescription(song.getDescription());
-            currentSong.setImg(song.getImg());
+//            currentSong.setImg(song.getImg());
+            currentSong.setCover_art_url(song.getCover_art_url());
             currentSong.setArtist(song.getArtist());
             currentSong.setDate(song.getDate());
             currentSong.setGenre(song.getGenre());

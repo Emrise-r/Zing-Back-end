@@ -4,6 +4,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
@@ -15,7 +16,7 @@ public class Song {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long songId;
 
-    @NotNull
+    @NotEmpty
     private String name;
 
     private String description;
@@ -24,19 +25,11 @@ public class Song {
 
     private String song_url;
 
-    @Transient
-    private MultipartFile imgFile;
-
-    public MultipartFile getSongFile() {
-        return songFile;
-    }
-
-    public void setSongFile(MultipartFile songFile) {
-        this.songFile = songFile;
-    }
-
-    @Transient
-    private MultipartFile songFile;
+//    @Transient
+//    private MultipartFile imgFile;
+//
+//    @Transient
+//    private MultipartFile songFile;
 
     private String artist;
 
@@ -51,6 +44,14 @@ public class Song {
     @ManyToOne
     @JoinColumn(name = "userid")
     private User user;
+
+//    public MultipartFile getSongFile() {
+//        return songFile;
+//    }
+//
+//    public void setSongFile(MultipartFile songFile) {
+//        this.songFile = songFile;
+//    }
 
     public String getSong_url() {
         return song_url;
@@ -92,13 +93,13 @@ public class Song {
         this.cover_art_url = cover_art_url;
     }
 
-    public MultipartFile getImgFile() {
-        return imgFile;
-    }
+//    public MultipartFile getImgFile() {
+//        return imgFile;
+//    }
 
-    public void setImgFile(MultipartFile imgFile) {
-        this.imgFile = imgFile;
-    }
+//    public void setImgFile(MultipartFile imgFile) {
+//        this.imgFile = imgFile;
+//    }
 
 
     public String getArtist() {

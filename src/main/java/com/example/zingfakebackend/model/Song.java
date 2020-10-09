@@ -1,5 +1,6 @@
 package com.example.zingfakebackend.model;
 
+import org.springframework.http.MediaType;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
@@ -19,10 +20,20 @@ public class Song {
 
     private String description;
 
-    private String img;
+    private String cover_art_url;
+
+    private String song_url;
 
     @Transient
     private MultipartFile imgFile;
+
+    public MultipartFile getSongFile() {
+        return songFile;
+    }
+
+    public void setSongFile(MultipartFile songFile) {
+        this.songFile = songFile;
+    }
 
     @Transient
     private MultipartFile songFile;
@@ -37,17 +48,17 @@ public class Song {
 
     private Long likes;
 
-    public Long getLikes() {
-        return likes;
-    }
-
-    public void setLikes(Long likes) {
-        this.likes = likes;
-    }
-
     @ManyToOne
     @JoinColumn(name = "userid")
     private User user;
+
+    public String getSong_url() {
+        return song_url;
+    }
+
+    public void setSong_url(String song_url) {
+        this.song_url = song_url;
+    }
 
     public Long getSongId() {
         return songId;
@@ -73,12 +84,12 @@ public class Song {
         this.description = description;
     }
 
-    public String getImg() {
-        return img;
+    public String getCover_art_url() {
+        return cover_art_url;
     }
 
-    public void setImg(String img) {
-        this.img = img;
+    public void setCover_art_url(String cover_art_url) {
+        this.cover_art_url = cover_art_url;
     }
 
     public MultipartFile getImgFile() {
@@ -89,13 +100,6 @@ public class Song {
         this.imgFile = imgFile;
     }
 
-    public MultipartFile getSongFile() {
-        return songFile;
-    }
-
-    public void setSongFile(MultipartFile songFile) {
-        this.songFile = songFile;
-    }
 
     public String getArtist() {
         return artist;
@@ -127,6 +131,14 @@ public class Song {
 
     public void setPlays(Long plays) {
         this.plays = plays;
+    }
+
+    public Long getLikes() {
+        return likes;
+    }
+
+    public void setLikes(Long likes) {
+        this.likes = likes;
     }
 
     public User getUser() {

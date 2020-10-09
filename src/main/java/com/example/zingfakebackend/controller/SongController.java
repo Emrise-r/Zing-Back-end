@@ -34,7 +34,26 @@ public class SongController {
       @PostMapping("/songs")
       public ResponseEntity<Song> createSong(@RequestBody Song song) {
             songService.save(song);
-            return new ResponseEntity<>(song, HttpStatus.OK);
+            return new ResponseEntity<>(song, HttpStatus.CREATED);
+      }
+
+      @PutMapping("/song/{id}")
+      public ResponseEntity<Song> updateSongInfo(@PathVariable long id, @RequestBody Song song) {
+            Song currentSong = songService.findById(id);
+            if (currentSong == null) {
+                  return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+            currentSong.setName(song.getName());
+            currentSong.setDescription(song.getDescription());
+            currentSong.setImg(song.getImg());
+            currentSong.setArtist(song.getArtist());
+            currentSong.setDate(song.getDate());
+            currentSong.setGenre(song.getGenre());
+            currentSong.setPlays(song.getPlays());
+            currentSong.setLikes(song.getLikes());
+
+            songService.save(currentSong);
+            return new ResponseEntity<>(currentSong, HttpStatus.OK);
       }
 
       @DeleteMapping("/song/{id}")
@@ -49,23 +68,26 @@ public class SongController {
 
       @GetMapping("/songs/plays/desc")
       public ResponseEntity<Iterable<Song>> songOrderByPlaysDesc() {
-            Iterable<Song> songPlays = songRepository.findByOrderByDateDesc();
+            Iterable<Song> songPlays = songRepository.findByOrderByPlaysDesc();
             return new ResponseEntity<>(songPlays, HttpStatus.OK);
       }
 
       @GetMapping("/songs/likes/desc")
       public ResponseEntity<Iterable<Song>> songOrderByLikesDesc() {
-            Iterable<Song> songPlays = songRepository.findByOrderByDateDesc();
-            return new ResponseEntity<>(songPlays, HttpStatus.OK);
+            Iterable<Song> songLikes = songRepository.findByOrderByLikesDesc();
+            return new ResponseEntity<>(songLikes, HttpStatus.OK);
       }
 
       @GetMapping("/songs/date/desc")
       public ResponseEntity<Iterable<Song>> songOrderByDateDesc() {
-            Iterable<Song> songPlays = songRepository.findByOrderByDateDesc();
-            return new ResponseEntity<>(songPlays, HttpStatus.OK);
+            Iterable<Song> songDate = songRepository.findByOrderByDateDesc();
+            return new ResponseEntity<>(songDate, HttpStatus.OK);
       }
 
-
+      @GetMapping("/songs/{name}")
+      public ResponseEntity<Iterable<Song>> findSongByNameContaining(@PathVariable String name) {
+            return new ResponseEntity<>(songService.findSongByName(name), HttpStatus.OK);
+      }
 
 
 }

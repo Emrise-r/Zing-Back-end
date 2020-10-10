@@ -19,13 +19,15 @@ public class Song {
 
     private String cover_art_url;
 
-    private String song_url;
+    public String getSong_url() {
+        return song_url;
+    }
 
-//    @Transient
-//    private MultipartFile imgFile;
-//
-//    @Transient
-//    private MultipartFile songFile;
+    public void setSong_url(String song_url) {
+        this.song_url = song_url;
+    }
+
+    private String song_url;
 
     private String artist;
 
@@ -80,22 +82,6 @@ public class Song {
     public void setCover_art_url(String cover_art_url) {
         this.cover_art_url = cover_art_url;
     }
-
-//    public MultipartFile getImgFile() {
-//        return imgFile;
-//    }
-//
-//    public void setImgFile(MultipartFile imgFile) {
-//        this.imgFile = imgFile;
-//    }
-//
-//    public MultipartFile getSongFile() {
-//        return songFile;
-//    }
-//
-//    public void setSongFile(MultipartFile songFile) {
-//        this.songFile = songFile;
-//    }
 
     public String getArtist() {
         return artist;

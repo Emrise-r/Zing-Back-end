@@ -7,4 +7,5 @@ public interface ISongRepository extends JpaRepository<Song, Long> {
       Iterable<Song> findByOrderByPlaysDesc();
       Iterable<Song> findByOrderByLikesDesc();
       Iterable<Song> findByOrderByDateDesc();
+
 }

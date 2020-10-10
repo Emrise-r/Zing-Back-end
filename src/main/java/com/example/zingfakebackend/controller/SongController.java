@@ -49,13 +49,13 @@ public class SongController {
 
       @GetMapping("/songs/plays/desc")
       public ResponseEntity<Iterable<Song>> songOrderByPlaysDesc() {
-            Iterable<Song> songPlays = songRepository.findByOrderByDateDesc();
+            Iterable<Song> songPlays = songRepository.findByOrderByPlaysDesc();
             return new ResponseEntity<>(songPlays, HttpStatus.OK);
       }
 
       @GetMapping("/songs/likes/desc")
       public ResponseEntity<Iterable<Song>> songOrderByLikesDesc() {
-            Iterable<Song> songPlays = songRepository.findByOrderByDateDesc();
+            Iterable<Song> songPlays = songRepository.findByOrderByLikesDesc();
             return new ResponseEntity<>(songPlays, HttpStatus.OK);
       }
 
@@ -64,8 +64,5 @@ public class SongController {
             Iterable<Song> songPlays = songRepository.findByOrderByDateDesc();
             return new ResponseEntity<>(songPlays, HttpStatus.OK);
       }
-
-
-
 
 }

@@ -1,9 +1,7 @@
 package com.example.zingfakebackend.model;
 
-import org.springframework.web.multipart.MultipartFile;
-
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 import java.util.Date;
 
 @Entity
@@ -14,18 +12,14 @@ public class Song {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long songId;
 
-    @NotNull
+    @NotEmpty
     private String name;
 
     private String description;
 
-    private String img;
+    private String cover_art_url;
 
-    @Transient
-    private MultipartFile imgFile;
-
-    @Transient
-    private MultipartFile songFile;
+    private String song_url;
 
     private String artist;
 
@@ -36,14 +30,6 @@ public class Song {
     private Long plays;
 
     private Long likes;
-
-    public Long getLikes() {
-        return likes;
-    }
-
-    public void setLikes(Long likes) {
-        this.likes = likes;
-    }
 
     @ManyToOne
     @JoinColumn(name = "userid")
@@ -73,28 +59,12 @@ public class Song {
         this.description = description;
     }
 
-    public String getImg() {
-        return img;
+    public String getCover_art_url() {
+        return cover_art_url;
     }
 
-    public void setImg(String img) {
-        this.img = img;
-    }
-
-    public MultipartFile getImgFile() {
-        return imgFile;
-    }
-
-    public void setImgFile(MultipartFile imgFile) {
-        this.imgFile = imgFile;
-    }
-
-    public MultipartFile getSongFile() {
-        return songFile;
-    }
-
-    public void setSongFile(MultipartFile songFile) {
-        this.songFile = songFile;
+    public void setCover_art_url(String cover_art_url) {
+        this.cover_art_url = cover_art_url;
     }
 
     public String getArtist() {
@@ -127,6 +97,14 @@ public class Song {
 
     public void setPlays(Long plays) {
         this.plays = plays;
+    }
+
+    public Long getLikes() {
+        return likes;
+    }
+
+    public void setLikes(Long likes) {
+        this.likes = likes;
     }
 
     public User getUser() {

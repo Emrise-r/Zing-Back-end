@@ -21,12 +21,6 @@ public class Song {
 
     private String song_url;
 
-//    @Transient
-//    private MultipartFile imgFile;
-//
-//    @Transient
-//    private MultipartFile songFile;
-
     private String artist;
 
     private Date date;
@@ -36,14 +30,6 @@ public class Song {
     private Long plays;
 
     private Long likes;
-
-    public Long getLikes() {
-        return likes;
-    }
-
-    public void setLikes(Long likes) {
-        this.likes = likes;
-    }
 
     @ManyToOne
     @JoinColumn(name = "userid")
@@ -81,22 +67,6 @@ public class Song {
         this.cover_art_url = cover_art_url;
     }
 
-//    public MultipartFile getImgFile() {
-//        return imgFile;
-//    }
-//
-//    public void setImgFile(MultipartFile imgFile) {
-//        this.imgFile = imgFile;
-//    }
-//
-//    public MultipartFile getSongFile() {
-//        return songFile;
-//    }
-//
-//    public void setSongFile(MultipartFile songFile) {
-//        this.songFile = songFile;
-//    }
-
     public String getArtist() {
         return artist;
     }
@@ -127,6 +97,14 @@ public class Song {
 
     public void setPlays(Long plays) {
         this.plays = plays;
+    }
+
+    public Long getLikes() {
+        return likes;
+    }
+
+    public void setLikes(Long likes) {
+        this.likes = likes;
     }
 
     public User getUser() {

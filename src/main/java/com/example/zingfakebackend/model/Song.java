@@ -19,6 +19,14 @@ public class Song {
 
     private String cover_art_url;
 
+    public String getSong_url() {
+        return song_url;
+    }
+
+    public void setSong_url(String song_url) {
+        this.song_url = song_url;
+    }
+
     private String song_url;
 
     private String artist;
@@ -30,6 +38,14 @@ public class Song {
     private Long plays;
 
     private Long likes;
+
+    public Long getLikes() {
+        return likes;
+    }
+
+    public void setLikes(Long likes) {
+        this.likes = likes;
+    }
 
     @ManyToOne
     @JoinColumn(name = "userid")
@@ -97,14 +113,6 @@ public class Song {
 
     public void setPlays(Long plays) {
         this.plays = plays;
-    }
-
-    public Long getLikes() {
-        return likes;
-    }
-
-    public void setLikes(Long likes) {
-        this.likes = likes;
     }
 
     public User getUser() {

@@ -1,8 +1,10 @@
 package com.example.zingfakebackend.controller;
 
 import com.example.zingfakebackend.model.Song;
+import com.example.zingfakebackend.model.User;
 import com.example.zingfakebackend.repository.ISongRepository;
 import com.example.zingfakebackend.service.song.ISongService;
+import com.example.zingfakebackend.service.user.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,9 @@ public class SongController {
 
       @Autowired
       ISongRepository songRepository;
+
+      @Autowired
+      IUserService userService;
 
       @GetMapping
       public ResponseEntity<Iterable<Song>> listSongs() {
@@ -91,5 +96,10 @@ public class SongController {
             return new ResponseEntity<>(songService.findSongByName(name), HttpStatus.OK);
       }
 
-
+      @GetMapping("/listByUid/{id}")
+      public ResponseEntity<Iterable<Song>> findSongsByUserId(@PathVariable Long id) {
+            User user = userService.findUserById(id);
+            Iterable<Song> listSongsByUid = songRepository.findAllByUser(user);
+            return new ResponseEntity<>(listSongsByUid, HttpStatus.OK);
+      }
 }

@@ -61,21 +61,20 @@ public class LoginRegisterController {
             SecurityContextHolder.getContext().setAuthentication(authentication);
             String jwt = jwtProvider.generateJwtToken(authentication);
 
-//            UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-//            List<String> roles;
-//            roles = userDetails.getAuthorities().stream()
-//                    .map(GrantedAuthority::getAuthority)
-//                    .collect(Collectors.toList());
-//            RefreshToken refreshToken = new RefreshToken();
-//            refreshToken.setToken(jwt);
-//            refreshTokenService.generateRefreshToken(refreshToken);
-//            return ResponseEntity.ok(new JwtResponse(jwt,
-//                    userDetails.getId(),
-//                    userDetails.getUsername(),
-//                    userDetails.getEmail(),
-//                    roles));
+            UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+            List<String> roles;
+            roles = userDetails.getAuthorities().stream()
+                    .map(GrantedAuthority::getAuthority)
+                    .collect(Collectors.toList());
+            RefreshToken refreshToken = new RefreshToken();
+            refreshToken.setToken(jwt);
+            refreshTokenService.generateRefreshToken(refreshToken);
+            return ResponseEntity.ok(new JwtResponse(jwt,
+                    userDetails.getId(),
+                    userDetails.getUsername(),
+                    userDetails.getEmail(),
+                    roles));
 
-            return ResponseEntity.ok(new JwtResponse(jwt));
       }
 
       @PostMapping("/register")
@@ -84,7 +83,7 @@ public class LoginRegisterController {
                   return new ResponseEntity<>("Fail -> Username is already taken!", HttpStatus.BAD_REQUEST);
             }
             if (userRepository.existsByEmail(registerRequest.getName())) {
-                  return new ResponseEntity<>("Fail -> Email is already in use!!", HttpStatus.BAD_REQUEST);
+                  return new ResponseEntity<>("Fail -> Email is already in use!", HttpStatus.BAD_REQUEST);
             }
 
             User user = new User(registerRequest.getName(),

@@ -95,10 +95,10 @@ public class User {
         this.roles = roles;
     }
 
-    public User(String name,String password,String email) {
+    public User(String name,String email,String password) {
         this.name = name;
-        this.password = password;
         this.email = email;
+        this.password = password;
     }
 
     public User() {

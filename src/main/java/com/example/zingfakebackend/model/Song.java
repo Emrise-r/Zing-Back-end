@@ -35,17 +35,11 @@ public class Song {
 
     private String genre;
 
-    private Long plays;
+    @Column(name = "plays")
+    private long plays = 0;
 
-    private Long likes;
-
-    public Long getLikes() {
-        return likes;
-    }
-
-    public void setLikes(Long likes) {
-        this.likes = likes;
-    }
+    @Column(name = "likes")
+    private long likes = 0;
 
     @ManyToOne
     @JoinColumn(name = "userid")
@@ -107,12 +101,20 @@ public class Song {
         this.genre = genre;
     }
 
-    public Long getPlays() {
+    public long getPlays() {
         return plays;
     }
 
-    public void setPlays(Long plays) {
+    public void setPlays(long plays) {
         this.plays = plays;
+    }
+
+    public long getLikes() {
+        return likes;
+    }
+
+    public void setLikes(long likes) {
+        this.likes = likes;
     }
 
     public User getUser() {
@@ -122,9 +124,4 @@ public class Song {
     public void setUser(User user) {
         this.user = user;
     }
-
-    public Song() {
-    }
-
-
 }

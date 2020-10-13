@@ -4,13 +4,17 @@ import javax.persistence.*;
 
 @Entity
 @Table
-public class Artist {
+public class Playlist {
+
       @Id
       @GeneratedValue(strategy = GenerationType.IDENTITY)
       private Long id;
 
-      @Column(unique = true)
       private String name;
+
+      @ManyToOne
+      @JoinColumn(name = "user_id")
+      private User user;
 
       public Long getId() {
             return id;
@@ -28,15 +32,11 @@ public class Artist {
             this.name = name;
       }
 
-      public Artist(Long id, String name) {
-            this.id = id;
-            this.name = name;
+      public User getUser() {
+            return user;
       }
 
-      public Artist(String name) {
-            this.name = name;
-      }
-
-      public Artist() {
+      public void setUser(User user) {
+            this.user = user;
       }
 }

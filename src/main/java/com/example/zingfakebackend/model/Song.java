@@ -29,23 +29,45 @@ public class Song {
 
     private String song_url;
 
-    private String artist;
+    @ManyToOne
+    @JoinColumn(name = "artist_id")
+    private Artist artist;
+
+
 
     private Date date;
 
     private String genre;
 
-    private Long plays;
+    @Column
+    private long plays = 0;
 
-    private Long likes;
+    @Column
+    private long likes = 0;
 
-    public Long getLikes() {
+    public long getPlays() {
+        return plays;
+    }
+
+    public void setPlays(long plays) {
+        this.plays = plays;
+    }
+
+    public long getLikes() {
         return likes;
     }
 
-    public void setLikes(Long likes) {
+    public void setLikes(long likes) {
         this.likes = likes;
     }
+
+    //    public Long getLikes() {
+//        return likes;
+//    }
+//
+//    public void setLikes(Long likes) {
+//        this.likes = likes;
+//    }
 
     @ManyToOne
     @JoinColumn(name = "userid")
@@ -83,11 +105,11 @@ public class Song {
         this.cover_art_url = cover_art_url;
     }
 
-    public String getArtist() {
+    public Artist getArtist() {
         return artist;
     }
 
-    public void setArtist(String artist) {
+    public void setArtist(Artist artist) {
         this.artist = artist;
     }
 
@@ -107,13 +129,13 @@ public class Song {
         this.genre = genre;
     }
 
-    public Long getPlays() {
-        return plays;
-    }
-
-    public void setPlays(Long plays) {
-        this.plays = plays;
-    }
+//    public Long getPlays() {
+//        return plays;
+//    }
+//
+//    public void setPlays(Long plays) {
+//        this.plays = plays;
+//    }
 
     public User getUser() {
         return user;

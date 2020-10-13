@@ -29,7 +29,7 @@ public class Song {
 
     private String song_url;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "artist_id")
     private Artist artist;
 
@@ -148,5 +148,16 @@ public class Song {
     public Song() {
     }
 
-
+    public Song(String name, String description, String cover_art_url, String song_url, Artist artist, Date date, String genre, long plays, long likes, User user) {
+        this.name = name;
+        this.description = description;
+        this.cover_art_url = cover_art_url;
+        this.song_url = song_url;
+        this.artist = artist;
+        this.date = date;
+        this.genre = genre;
+        this.plays = plays;
+        this.likes = likes;
+        this.user = user;
+    }
 }

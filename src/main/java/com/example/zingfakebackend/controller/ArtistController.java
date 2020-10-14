@@ -6,11 +6,11 @@ import com.example.zingfakebackend.service.song.IArtistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/artist")
 public class ArtistController {
       @Autowired
       IArtistService artistService;
@@ -27,7 +27,7 @@ public class ArtistController {
 //            return new ResponseEntity<>(artists, HttpStatus.OK);
 //      }
 
-      @PostMapping("/create-artist")
+      @PostMapping("/artist/create-artist")
       public ResponseEntity<Artist> createArtist(@RequestBody Artist artist) {
             artistService.save(artist);
             return new ResponseEntity<>(artist, HttpStatus.CREATED);

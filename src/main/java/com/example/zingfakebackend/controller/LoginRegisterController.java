@@ -18,6 +18,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -118,6 +119,12 @@ public class LoginRegisterController {
       @PostMapping("/logout")
       public ResponseEntity<?> logout(@Valid @RequestBody RefreshTokenRequest refreshTokenRequest) {
             refreshTokenService.deleteRefreshToken(refreshTokenRequest.getToken());
+            return ResponseEntity.ok().body("Bye!");
+      }
+
+      @GetMapping("/test")
+      public ResponseEntity<?> tset(@Valid @RequestBody RefreshTokenRequest refreshTokenRequest, HttpSecurity httpSecurity, Authentication auth) {
+            auth.getPrincipal();
             return ResponseEntity.ok().body("Bye!");
       }
 }

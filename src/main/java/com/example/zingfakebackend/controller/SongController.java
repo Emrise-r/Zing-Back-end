@@ -66,7 +66,6 @@ public class SongController {
             }
             currentSong.setName(song.getName());
             currentSong.setDescription(song.getDescription());
-//            currentSong.setImg(song.getImg());
             currentSong.setCover_art_url(song.getCover_art_url());
             currentSong.setArtist(song.getArtist());
             currentSong.setDate(song.getDate());
@@ -125,12 +124,6 @@ public class SongController {
             return new ResponseEntity<>(listSongsByAid, HttpStatus.OK);
       }
 
-      @GetMapping("/listByPlaylist/{id}")
-      public ResponseEntity<Iterable<Song>> findAllSongByPlaylist(@PathVariable Long id) {
-            Playlist playlist = playlistService.findById(id);
-            Iterable<Song> listSongsByPid = songRepository.findAllByPlaylist(playlist);
-            return new ResponseEntity<>(listSongsByPid, HttpStatus.OK);
-      }
 
       @GetMapping("/allArtist")
       public ResponseEntity<Iterable<Artist>> listArtists() {

@@ -1,7 +1,10 @@
 package com.example.zingfakebackend.controller;
 
 import com.example.zingfakebackend.model.Playlist;
+import com.example.zingfakebackend.model.User;
+import com.example.zingfakebackend.repository.IPlaylistRepository;
 import com.example.zingfakebackend.service.song.IPlaylistService;
+import com.example.zingfakebackend.service.user.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +16,12 @@ import org.springframework.web.bind.annotation.*;
 public class PlaylistController {
       @Autowired
       IPlaylistService playlistService;
+
+      @Autowired
+      IUserService userService;
+
+      @Autowired
+      IPlaylistRepository playlistRepository;
 
       @GetMapping
       public ResponseEntity<Iterable<Playlist>> getAllPlaylists() {
@@ -52,5 +61,10 @@ public class PlaylistController {
             return new ResponseEntity<>(playlistService.findByName(name), HttpStatus.OK);
       }
 
-
+      @GetMapping("/listByUid/{id}")
+      public ResponseEntity<Iterable<Playlist>> findPlaylistsByUserId(@PathVariable Long id) {
+            User user = userService.findUserById(id);
+            Iterable<Playlist> listPlaylistsByUid = playlistRepository.findAllByUser(user);
+            return new ResponseEntity<>(listPlaylistsByUid, HttpStatus.OK);
+      }
 }

@@ -1,7 +1,6 @@
 package com.example.zingfakebackend.repository;
 
 import com.example.zingfakebackend.model.Artist;
-import com.example.zingfakebackend.model.Playlist;
 import com.example.zingfakebackend.model.Song;
 import com.example.zingfakebackend.model.User;
 
@@ -15,5 +14,4 @@ public interface ISongRepository extends JpaRepository<Song, Long> {
       Iterable<Song> findAllByNameContaining(String name);
       Iterable<Song> findAllByUser(User user);
       Iterable<Song> findAllByArtist(Artist artist);
-      Iterable<Song> findAllByPlaylist(Playlist playlist);
 }

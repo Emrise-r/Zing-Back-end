@@ -54,7 +54,6 @@ public class SongController {
 
       @PostMapping("/create")
       public ResponseEntity<Song> createSong(@RequestBody Song song) {
-            Song song1 = song;
             songService.save(song);
             return new ResponseEntity<>(song, HttpStatus.CREATED);
       }

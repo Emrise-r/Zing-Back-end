@@ -57,9 +57,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/api/auth/**").permitAll()
                     .antMatchers("/song/**").permitAll()
                     .antMatchers("/artist/**").permitAll()
-                    .antMatchers("/playlist/**").access("hasRole('ROLE_USER')")
+                    .antMatchers("/playlist/**").permitAll()
                     .antMatchers("/user/**").permitAll()
-
+                    .antMatchers("/playlist-song/**").permitAll()
                     .anyRequest().authenticated();
             http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
       }

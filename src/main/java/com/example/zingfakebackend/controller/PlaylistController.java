@@ -26,7 +26,6 @@ public class PlaylistController {
       @GetMapping
       public ResponseEntity<Iterable<Playlist>> getAllPlaylists() {
             Iterable<Playlist> playlists = playlistService.findAll();
-
             return new ResponseEntity<>(playlists, HttpStatus.OK);
       }
 

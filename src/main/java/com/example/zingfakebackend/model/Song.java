@@ -29,7 +29,7 @@ public class Song {
 
     private String song_url;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "artist_id")
     private Artist artist;
 

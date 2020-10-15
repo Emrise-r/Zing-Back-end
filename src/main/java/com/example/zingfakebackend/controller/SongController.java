@@ -1,8 +1,11 @@
 package com.example.zingfakebackend.controller;
 
+import com.example.zingfakebackend.model.Artist;
 import com.example.zingfakebackend.model.Song;
 import com.example.zingfakebackend.model.User;
+import com.example.zingfakebackend.repository.IArtistRepository;
 import com.example.zingfakebackend.repository.ISongRepository;
+import com.example.zingfakebackend.service.song.IArtistService;
 import com.example.zingfakebackend.service.song.ISongService;
 import com.example.zingfakebackend.service.user.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +25,13 @@ public class SongController {
 
       @Autowired
       IUserService userService;
+
+      @Autowired
+      IArtistService artistService;
+
+      @Autowired
+      IArtistRepository artistRepository;
+
 
       @GetMapping
       public ResponseEntity<Iterable<Song>> listSongs() {
@@ -52,7 +62,7 @@ public class SongController {
             }
             currentSong.setName(song.getName());
             currentSong.setDescription(song.getDescription());
-//            currentSong.setImg(song.getImg());
+
             currentSong.setCover_art_url(song.getCover_art_url());
             currentSong.setArtist(song.getArtist());
             currentSong.setDate(song.getDate());
@@ -102,5 +112,26 @@ public class SongController {
             User user = userService.findUserById(id);
             Iterable<Song> listSongsByUid = songRepository.findAllByUser(user);
             return new ResponseEntity<>(listSongsByUid, HttpStatus.OK);
+      }
+
+      @GetMapping("/listByArtist/{id}")
+      public ResponseEntity<Iterable<Song>> findAllSongByArtist(@PathVariable Long id) {
+            Artist artist = artistService.findArtistById(id);
+            Iterable<Song> listSongsByAid = songRepository.findAllByArtist(artist);
+            return new ResponseEntity<>(listSongsByAid, HttpStatus.OK);
+      }
+
+      @GetMapping("/allArtist")
+      public ResponseEntity<Iterable<Artist>> listArtists() {
+            Iterable<Artist> artists = artistService.findAll();
+            if (artists == null) {
+                  return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+            return new ResponseEntity<>(artists, HttpStatus.OK);
+      }
+
+      @GetMapping("/search-artist/{name}")
+      public ResponseEntity<Iterable<Artist>> findArtistByNameContaining(@PathVariable String name) {
+            return new ResponseEntity<>(artistRepository.findAllByNameContaining(name), HttpStatus.OK);
       }
 }

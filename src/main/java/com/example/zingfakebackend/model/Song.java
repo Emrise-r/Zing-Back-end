@@ -29,17 +29,36 @@ public class Song {
 
     private String song_url;
 
-    private String artist;
+    @ManyToOne
+    @JoinColumn(name = "artist_id")
+    private Artist artist;
 
     private Date date;
 
     private String genre;
 
-    @Column(name = "plays")
+    @Column
     private long plays = 0;
 
-    @Column(name = "likes")
+    @Column
     private long likes = 0;
+
+    public long getPlays() {
+        return plays;
+    }
+
+    public void setPlays(long plays) {
+        this.plays = plays;
+    }
+
+    public long getLikes() {
+        return likes;
+    }
+
+    public void setLikes(long likes) {
+        this.likes = likes;
+    }
+
 
     @ManyToOne
     @JoinColumn(name = "userid")
@@ -77,11 +96,11 @@ public class Song {
         this.cover_art_url = cover_art_url;
     }
 
-    public String getArtist() {
+    public Artist getArtist() {
         return artist;
     }
 
-    public void setArtist(String artist) {
+    public void setArtist(Artist artist) {
         this.artist = artist;
     }
 
@@ -101,27 +120,27 @@ public class Song {
         this.genre = genre;
     }
 
-    public long getPlays() {
-        return plays;
-    }
-
-    public void setPlays(long plays) {
-        this.plays = plays;
-    }
-
-    public long getLikes() {
-        return likes;
-    }
-
-    public void setLikes(long likes) {
-        this.likes = likes;
-    }
-
     public User getUser() {
         return user;
     }
 
     public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Song() {
+    }
+
+    public Song(String name, String description, String cover_art_url, String song_url, Artist artist, Date date, String genre, long plays, long likes, User user) {
+        this.name = name;
+        this.description = description;
+        this.cover_art_url = cover_art_url;
+        this.song_url = song_url;
+        this.artist = artist;
+        this.date = date;
+        this.genre = genre;
+        this.plays = plays;
+        this.likes = likes;
         this.user = user;
     }
 }

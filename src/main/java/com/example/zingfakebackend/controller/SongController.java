@@ -1,11 +1,13 @@
 package com.example.zingfakebackend.controller;
 
 import com.example.zingfakebackend.model.Artist;
+import com.example.zingfakebackend.model.Playlist;
 import com.example.zingfakebackend.model.Song;
 import com.example.zingfakebackend.model.User;
 import com.example.zingfakebackend.repository.IArtistRepository;
 import com.example.zingfakebackend.repository.ISongRepository;
 import com.example.zingfakebackend.service.song.IArtistService;
+import com.example.zingfakebackend.service.song.IPlaylistService;
 import com.example.zingfakebackend.service.song.ISongService;
 import com.example.zingfakebackend.service.user.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,9 @@ public class SongController {
       IArtistService artistService;
 
       @Autowired
+      IPlaylistService playlistService;
+
+      @Autowired
       IArtistRepository artistRepository;
 
 
@@ -49,7 +54,6 @@ public class SongController {
 
       @PostMapping("/create")
       public ResponseEntity<Song> createSong(@RequestBody Song song) {
-            Song song1 = song;
             songService.save(song);
             return new ResponseEntity<>(song, HttpStatus.CREATED);
       }
@@ -62,7 +66,6 @@ public class SongController {
             }
             currentSong.setName(song.getName());
             currentSong.setDescription(song.getDescription());
-
             currentSong.setCover_art_url(song.getCover_art_url());
             currentSong.setArtist(song.getArtist());
             currentSong.setDate(song.getDate());
@@ -120,6 +123,7 @@ public class SongController {
             Iterable<Song> listSongsByAid = songRepository.findAllByArtist(artist);
             return new ResponseEntity<>(listSongsByAid, HttpStatus.OK);
       }
+
 
       @GetMapping("/allArtist")
       public ResponseEntity<Iterable<Artist>> listArtists() {

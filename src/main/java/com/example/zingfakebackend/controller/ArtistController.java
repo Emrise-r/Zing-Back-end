@@ -18,14 +18,7 @@ public class ArtistController {
       @Autowired
       IArtistRepository artistRepository;
 
-//      @GetMapping
-//      public ResponseEntity<Iterable<Artist>> listArtists() {
-//            Iterable<Artist> artists = artistService.findAll();
-//            if (artists == null) {
-//                  return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//            }
-//            return new ResponseEntity<>(artists, HttpStatus.OK);
-//      }
+
 
       @PostMapping("/create-artist")
       public ResponseEntity<Artist> createArtist(@RequestBody Artist artist) {

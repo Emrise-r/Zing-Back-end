@@ -33,6 +33,8 @@ public class Song {
     @JoinColumn(name = "artist_id")
     private Artist artist;
 
+
+
     private Date date;
 
     private String genre;
@@ -59,6 +61,13 @@ public class Song {
         this.likes = likes;
     }
 
+    //    public Long getLikes() {
+//        return likes;
+//    }
+//
+//    public void setLikes(Long likes) {
+//        this.likes = likes;
+//    }
 
     @ManyToOne
     @JoinColumn(name = "userid")
@@ -119,6 +128,14 @@ public class Song {
     public void setGenre(String genre) {
         this.genre = genre;
     }
+
+//    public Long getPlays() {
+//        return plays;
+//    }
+//
+//    public void setPlays(Long plays) {
+//        this.plays = plays;
+//    }
 
     public User getUser() {
         return user;

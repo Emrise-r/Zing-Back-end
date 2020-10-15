@@ -3,8 +3,8 @@ package com.example.zingfakebackend.model;
 import javax.persistence.*;
 
 @Entity
-@Table
-public class Playlist_Song {
+@Table(name = "playlist_song")
+public class PlaylistSong {
 
       @Id
       @GeneratedValue(strategy = GenerationType.IDENTITY)

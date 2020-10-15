@@ -1,7 +1,5 @@
 package com.example.zingfakebackend.model.payload.request;
 
-import com.example.zingfakebackend.email.ValidEmail;
-
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;

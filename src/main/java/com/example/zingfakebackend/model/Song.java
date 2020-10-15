@@ -1,8 +1,11 @@
 package com.example.zingfakebackend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table
@@ -72,6 +75,10 @@ public class Song {
     @ManyToOne
     @JoinColumn(name = "userid")
     private User user;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "pl_songs")
+    private List<Playlist> s_playlist;
 
     public Long getSongId() {
         return songId;

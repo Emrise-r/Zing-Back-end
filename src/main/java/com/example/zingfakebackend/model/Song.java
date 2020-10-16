@@ -1,9 +1,7 @@
 package com.example.zingfakebackend.model;
 
-import org.springframework.web.multipart.MultipartFile;
-
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 import java.util.Date;
 
 @Entity
@@ -14,18 +12,22 @@ public class Song {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long songId;
 
-    @NotNull
+    @NotEmpty
     private String name;
 
     private String description;
 
-    private String img;
+    private String cover_art_url;
 
-    @Transient
-    private MultipartFile imgFile;
+    public String getSong_url() {
+        return song_url;
+    }
 
-    @Transient
-    private MultipartFile songFile;
+    public void setSong_url(String song_url) {
+        this.song_url = song_url;
+    }
+
+    private String song_url;
 
     private String artist;
 
@@ -33,17 +35,11 @@ public class Song {
 
     private String genre;
 
-    private Long plays;
+    @Column(name = "plays")
+    private long plays = 0;
 
-    private Long likes;
-
-    public Long getLikes() {
-        return likes;
-    }
-
-    public void setLikes(Long likes) {
-        this.likes = likes;
-    }
+    @Column(name = "likes")
+    private long likes = 0;
 
     @ManyToOne
     @JoinColumn(name = "userid")
@@ -73,28 +69,12 @@ public class Song {
         this.description = description;
     }
 
-    public String getImg() {
-        return img;
+    public String getCover_art_url() {
+        return cover_art_url;
     }
 
-    public void setImg(String img) {
-        this.img = img;
-    }
-
-    public MultipartFile getImgFile() {
-        return imgFile;
-    }
-
-    public void setImgFile(MultipartFile imgFile) {
-        this.imgFile = imgFile;
-    }
-
-    public MultipartFile getSongFile() {
-        return songFile;
-    }
-
-    public void setSongFile(MultipartFile songFile) {
-        this.songFile = songFile;
+    public void setCover_art_url(String cover_art_url) {
+        this.cover_art_url = cover_art_url;
     }
 
     public String getArtist() {
@@ -121,12 +101,20 @@ public class Song {
         this.genre = genre;
     }
 
-    public Long getPlays() {
+    public long getPlays() {
         return plays;
     }
 
-    public void setPlays(Long plays) {
+    public void setPlays(long plays) {
         this.plays = plays;
+    }
+
+    public long getLikes() {
+        return likes;
+    }
+
+    public void setLikes(long likes) {
+        this.likes = likes;
     }
 
     public User getUser() {
@@ -136,9 +124,4 @@ public class Song {
     public void setUser(User user) {
         this.user = user;
     }
-
-    public Song() {
-    }
-
-
 }

@@ -18,8 +18,6 @@ public class ArtistController {
       @Autowired
       IArtistRepository artistRepository;
 
-
-
       @PostMapping("/create-artist")
       public ResponseEntity<Artist> createArtist(@RequestBody Artist artist) {
             artistService.save(artist);

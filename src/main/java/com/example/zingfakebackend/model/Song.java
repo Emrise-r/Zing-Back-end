@@ -29,7 +29,9 @@ public class Song {
 
     private String song_url;
 
-    private String artist;
+    @ManyToOne
+    @JoinColumn(name = "artist_id")
+    private Artist artist;
 
     private Date date;
 
@@ -77,11 +79,11 @@ public class Song {
         this.cover_art_url = cover_art_url;
     }
 
-    public String getArtist() {
+    public Artist getArtist() {
         return artist;
     }
 
-    public void setArtist(String artist) {
+    public void setArtist(Artist artist) {
         this.artist = artist;
     }
 

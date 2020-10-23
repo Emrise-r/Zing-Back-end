@@ -1,6 +1,8 @@
 package com.example.zingfakebackend.model;
 
 import com.example.zingfakebackend.email.ValidEmail;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import net.minidev.json.annotate.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -24,8 +26,10 @@ public class User {
 
     private String name;
 
+    @JsonIgnore
     private String password;
 
+    @ValidEmail
     private String email;
 
     private String account_url;
@@ -38,22 +42,12 @@ public class User {
         this.account_url = account_url;
     }
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
-//    @OneToMany(mappedBy = "user")
-//    private Set<Song> songs;
-//
-//    public Set<Song> getSongs() {
-//        return songs;
-//    }
-//
-//    public void setSongs(Set<Song> songs) {
-//        this.songs = songs;
-//    }
 
     public Long getUserId() {
         return userId;
@@ -71,6 +65,9 @@ public class User {
         this.name = name;
     }
 
+
+    @JsonIgnore
+    @JsonProperty(value = "password")
     public String getPassword() {
         return password;
     }

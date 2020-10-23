@@ -1,8 +1,9 @@
 package com.example.zingfakebackend.model;
 
 import com.example.zingfakebackend.email.ValidEmail;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import net.minidev.json.annotate.JsonIgnore;
+
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
